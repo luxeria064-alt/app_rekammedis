@@ -15,21 +15,16 @@ class RolePermissionSeeder extends Seeder
             'kelola dokter',
             'kelola rekam medis',
         ];
-
         foreach ($permissions as $permission) {
             Permission::firstOrCreate(['name' => $permission]);
         }
-
         $admin = Role::firstOrCreate(['name' => 'admin']);
         $dokter = Role::firstOrCreate(['name' => 'dokter']);
         $petugas = Role::firstOrCreate(['name' => 'petugas']);
-
         $admin->syncPermissions($permissions);
-
         $dokter->syncPermissions([
             'kelola rekam medis',
         ]);
-
         $petugas->syncPermissions([
             'kelola pasien',
         ]);
